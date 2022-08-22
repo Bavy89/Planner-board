@@ -1,3 +1,4 @@
+    client = client_
     var headers = {
       Authorization: "Basic aElLdE5uRnJyWk1TTUZKRjI1TzpY",
       dataType: "application/json",
