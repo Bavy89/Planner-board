@@ -87,7 +87,7 @@ function previewTicket(ticketId) {
       
       $.ajax(settings).done(function (response) {
         console.log(response)
-        document.getElementById("modaldesc").innerHTML = "Ticket description: "+response["description"];
+        document.getElementById("modaldesc").innerHTML = "<h3>"+response["subject"]+"</h3><hr>Ticket description: "+response["description"];
 
     
     
