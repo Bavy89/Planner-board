@@ -28,7 +28,9 @@ var settings = {
             $('#inprogressboard').append(  "<div class='task' draggable='true'><div class='task__tags'><span class='task__tag task__tag--tag3'>Prioritet: "+ ticketPriority +"</span><button class='task__options'><i class='fas fa-ellipsis-h'></i></button></div><p>" + ticketSubject +"</p><div class='task__stats'><span><time datetime='2021-11-24T20:00:00'><i class='fas fa-flag'></i>"+ticketCreated+"</time></span></div>");
         } else if (ticketStatus == "8" || ticketStatus == "7") {
             $('#blockedboard').append(  "<div class='task' draggable='true'><div class='task__tags'><span class='task__tag task__tag--tag4'>Prioritet: "+ ticketPriority +"</span><button class='task__options'><i class='fas fa-ellipsis-h'></i></button></div><p>" + ticketSubject +"</p><div class='task__stats'><span><time datetime='2021-11-24T20:00:00'><i class='fas fa-flag'></i>"+ticketCreated+"</time></span></div>");
-        } else 
+        } else if (ticketStatus == "4") {
+            $('#doneboard').append(  "<div class='task' draggable='true'><div class='task__tags'><span class='task__tag task__tag--tag4'>Prioritet: "+ ticketPriority +"</span><button class='task__options'><i class='fas fa-ellipsis-h'></i></button></div><p>" + ticketSubject +"</p><div class='task__stats'><span><time datetime='2021-11-24T20:00:00'><i class='fas fa-flag'></i>"+ticketCreated+"</time></span></div>");
+        }
         console.log("no")
     }
 
