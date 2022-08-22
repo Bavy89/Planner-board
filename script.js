@@ -10,5 +10,16 @@ var settings = {
   };
   
   $.ajax(settings).done(function (response) {
-    console.log(response);
+    console.log(response)
+    const arr = response
+    const myJSON = JSON.stringify(arr);
+    console.log(myJSON)
+    document.getElementById("test").innerHTML = response;
+
+    for (var i = 0; i < response.length; i++) {
+        console.log(myStringArray[i]);
+        console.log("lol")
+    }
   });
+
+console.log("hei")
