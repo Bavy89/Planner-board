@@ -1,99 +1,111 @@
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Board</title>
-    <link href="style.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  </head>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Board</title>
+  <link href="style.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+
 <body>
 
 
 
-    <!-- The Modal -->
-    <div class="modal" id="myModal">
-      <div class="modal-dialog">
-        <div class="modal-content">
-        
-          <!-- Modal Header -->
-          <div class="modal-header">
-            <h4 class="modal-title"><center><h4 style="font-weight: bold;color:white;"id="taskId"></p></center></h4>
-          </div>
-          
-          <!-- Modal body -->
-          <div class="modal-body">
-            <p id="commentsdesc">Her kommer det kommentarer</p>
-            <p style="color:white;" id="modaldesc">ticket details with options</p>
-          </div>
-          
-          <!-- Modal footer -->
-          <div class="modal-footer">
-            <button type="button" class="btn btn-warning" disabled="true">Kommenter</button>
-            <button type="button" class="btn btn-dark" data-dismiss="modal">Lukk</button>
-          </div>
-          
+  <!-- The Modal -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">
+            <center>
+              <h4 style="font-weight: bold;color:white;" id="taskId">
+                </p>
+            </center>
+          </h4>
         </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div id="commentsdesc"></div>
+          <p style="color:white;" id="modaldesc">ticket details with options</p>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning" disabled="true">Kommenter</button>
+          <button type="button" class="btn btn-dark" data-dismiss="modal">Lukk</button>
+        </div>
+
       </div>
     </div>
-    
   </div>
-  
 
-<div class='app'>
-  <main class='project'>
-    <div class='project-info'>
-      <h1>Kanban board - Spesialist Team</h1>
-      <div class='project-participants'>
-        </div>
-    </div>
-    <div class='project-tasks'>
-      <div class='project-column'>
-        <div class='project-column-heading'>
-          <h2 class='project-column-heading__title'>Backlog</h2><button class='project-column-heading__options'><i class="fas fa-ellipsis-h"></i></button>
-        </div>
-        <div
-        <div id="backlog">
+  </div>
+
+
+  <div class='app'>
+    <main class='project'>
+      <div class='project-info'>
+        <h1>Kanban board - Spesialist Team</h1>
+        <div class='project-participants'>
         </div>
       </div>
-      <div class='project-column'><div class='project-column-heading'>
-          <h2 class='project-column-heading__title'>Ready</h2><button class='project-column-heading__options'><i class="fas fa-ellipsis-h"></i></button>
+      <div class='project-tasks'>
+        <div class='project-column'>
+          <div class='project-column-heading'>
+            <h2 class='project-column-heading__title'>Backlog</h2><button class='project-column-heading__options'><i
+                class="fas fa-ellipsis-h"></i></button>
+          </div>
+          <div id="backlog">
+          </div>
         </div>
-          
-        <div id="readyboard">
-        </div>        
+        <div class='project-column'>
+          <div class='project-column-heading'>
+            <h2 class='project-column-heading__title'>Ready</h2><button class='project-column-heading__options'><i
+                class="fas fa-ellipsis-h"></i></button>
+          </div>
+
+          <div id="readyboard">
+          </div>
         </div>
-      <div class='project-column'><div class='project-column-heading'>
-          <h2 class='project-column-heading__title'>In progress</h2><button class='project-column-heading__options'><i class="fas fa-ellipsis-h"></i></button>
-        </div>
-          
-        <div id="inprogressboard"> 
-        </div>
+        <div class='project-column'>
+          <div class='project-column-heading'>
+            <h2 class='project-column-heading__title'>In progress</h2><button class='project-column-heading__options'><i
+                class="fas fa-ellipsis-h"></i></button>
+          </div>
+
+          <div id="inprogressboard">
+          </div>
         </div>
 
-      <div class='project-column'><div class='project-column-heading'>
-          <h2 class='project-column-heading__title'>Blocked</h2><button class='project-column-heading__options'><i class="fas fa-ellipsis-h"></i></button>
-        </div>
-        
-         <div id="blockedboard"></div>
+        <div class='project-column'>
+          <div class='project-column-heading'>
+            <h2 class='project-column-heading__title'>Blocked</h2><button class='project-column-heading__options'><i
+                class="fas fa-ellipsis-h"></i></button>
+          </div>
+
+          <div id="blockedboard"></div>
         </div>
 
-      
-      <div class='project-column'><div class='project-column-heading'>
-          <h2 class='project-column-heading__title'>Done (Monitoring)</h2><button class='project-column-heading__options'><i class="fas fa-ellipsis-h"></i></button>
-        </div>
-        
-        <div id="doneboard"></div>
-        </div>
-        </div>
 
-      
-        
-    </div>
-  </main>
-</div>
-<script src="script.js"></script>
+        <div class='project-column'>
+          <div class='project-column-heading'>
+            <h2 class='project-column-heading__title'>Done (Monitoring)</h2><button
+              class='project-column-heading__options'><i class="fas fa-ellipsis-h"></i></button>
+          </div>
+
+          <div id="doneboard"></div>
+        </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
 
 </body>
+
 </html>
