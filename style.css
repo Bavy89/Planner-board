@@ -301,6 +301,7 @@ h1 {
   
   /* The Close Button */
   .close {
+    display: none;
     color: #aaaaaa;
     float: right;
     font-size: 28px;
