@@ -60,7 +60,7 @@ function previewTicket(ticketId) {
           "Cookie": "_x_m=x_c; _x_w=6_1"
         },
       };
-      $(this).removeData('commentsdesc');
+      $("#commentsdesc").empty();
       $.ajax(settings).done(function (response) {
         document.getElementById("modaldesc").innerHTML = `<div class='alert alert-info' role='alert'><h4>${response["subject"]}</h4><small>${response["created_at"]}</small><hr> <p>${response["description"]}</p></div>`;
         document.getElementById("taskId").innerHTML = `Ticket: <a href="https://specialist-cc.freshdesk.com/a/tickets/${ticketId}" target="blank">${ticketId}</a>`;
@@ -71,4 +71,3 @@ function previewTicket(ticketId) {
       
       });
     }
-

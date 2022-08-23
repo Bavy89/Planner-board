@@ -286,12 +286,17 @@ h1 {
 }
 
 .modal-content {
-    width: 80rem;
-    max-height: 85%;
+    width: 100rem;
+    max-height: 95%;
     overflow-y: auto;
     background-color: #666 !important;
     
     
+}
+
+.modal-dialog {
+    transform: translate(-50, -50%);
+    margin: 0 auto;
 }
 
 .modal-header {
@@ -301,5 +306,3 @@ h1 {
 .modal-footer {
     border-top: 0 !important;
 }
-
-@import url();
