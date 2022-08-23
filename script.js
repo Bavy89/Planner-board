@@ -10,19 +10,16 @@ var settings = {
   };
   
   $.ajax(settings).done(function (response) {
-console.log(response)
     tickets = response
-
     for(var i=0; i<tickets.length; i++){
+
        var ticketPriority = tickets[i]["priority"]
        var ticketSubject = tickets[i]["subject"] 
        var ticketCreated = tickets[i]["created_at"].slice(0, -10)
        var ticketStatus = tickets[i]["status"]
        var ticketId = tickets[i]["id"]
-        backlogState = 'New'
-        console.log(tickets[i]["status"])
-        console.log(tickets[i]["id"])
-        console.log("hei")
+       var backlogState = "New"
+
         if (ticketStatus == "9") {
             backlogState = 'Backlog'
         } else if (ticketStatus == "3") {
@@ -65,10 +62,8 @@ function previewTicket(ticketId) {
       };
       $(this).removeData('commentsdesc');
       $.ajax(settings).done(function (response) {
-        console.log(response)
-        document.getElementById("modaldesc").innerHTML = `<div class='alert alert-info' role='alert'><h4>${response["subject"]}</h4><small>${response["created_at"]}</small><hr> <p>${response["description"]} || ${response["custom_fields"]["cf_type2"]}</p></div>`;
+        document.getElementById("modaldesc").innerHTML = `<div class='alert alert-info' role='alert'><h4>${response["subject"]}</h4><small>${response["created_at"]}</small><hr> <p>${response["description"]}</p></div>`;
         document.getElementById("taskId").innerHTML = `Ticket: <a href="https://specialist-cc.freshdesk.com/a/tickets/${ticketId}" target="blank">${ticketId}</a>`;
-        console.log(response["conversations"])
         response["conversations"].map(element => {
           $('#commentsdesc').append(`<div class='alert alert-warning' role='alert'><h4>Kommentar</h4><small>${element["created_at"]}</small> <hr>${   element["body"]}</div>`);
 
