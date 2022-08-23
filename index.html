@@ -6,20 +6,41 @@
     <link href="style.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    
   </head>
 <body>
 
-  <div id="myModal" class="modal">
 
-    <!-- Modal content -->
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <p style="color:black;" id="modaldesc"></p>
+
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+        
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title"><center><h4 style="font-weight: bold;"id="taskId"></p></center></h4>
+          </div>
+          
+          <!-- Modal body -->
+          <div class="modal-body">
+            <p style="color:black;" id="modaldesc">ticket details with options</p>
+          </div>
+          
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-warning" disabled="true">Kommenter</button>
+            <button type="button" class="btn btn-dark" data-dismiss="modal">Lukk</button>
+          </div>
+          
+        </div>
+      </div>
     </div>
-  
+    
   </div>
   
-</div>
+
 <div class='app'>
   <main class='project'>
     <div class='project-info'>
@@ -73,5 +94,6 @@
   </main>
 </div>
 <script src="script.js"></script>
+
 </body>
 </html>
