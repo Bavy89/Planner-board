@@ -2,12 +2,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
     color: #eee !important;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Poppins', sans-serif !important;
   font-size: 12x;
   line-height: 1.42857143;
   background-color: #202020;
@@ -289,4 +289,17 @@ h1 {
     width: 80rem;
     max-height: 85%;
     overflow-y: auto;
+    background-color: #666 !important;
+    
+    
 }
+
+.modal-header {
+    background-color: #424242 !important;
+}
+
+.modal-footer {
+    border-top: 0 !important;
+}
+
+@import url();

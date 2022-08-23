@@ -14,7 +14,6 @@ var settings = {
     tickets = response
 
     for(var i=0; i<tickets.length; i++){
-        //console.log(tickets)
        var ticketPriority = tickets[i]["priority"]
        var ticketSubject = tickets[i]["subject"] 
        var ticketCreated = tickets[i]["created_at"].slice(0, -10)
@@ -45,6 +44,7 @@ var settings = {
 
 
 function previewTicket(ticketId) {
+  
     var settings = {
         "url": "https://specialist-cc.freshdesk.com/api/v2/tickets/"+ticketId+"?include=conversations",
         "method": "GET",
@@ -55,15 +55,17 @@ function previewTicket(ticketId) {
           "Cookie": "_x_m=x_c; _x_w=6_1"
         },
       };
-      
+      $(this).removeData('commentsdesc');
       $.ajax(settings).done(function (response) {
         console.log(response)
-        document.getElementById("modaldesc").innerHTML = "<div class='alert alert-info' role='alert'><h4>"+response["subject"]+"</h4> <p>"+response["description"]+"</p></div>";
+        document.getElementById("modaldesc").innerHTML = "<h4>"+response["subject"]+"</h4> <p>"+response["description"]+"</p>";
         document.getElementById("taskId").innerHTML = 'Ticket: <a href="https://specialist-cc.freshdesk.com/a/tickets/'+ticketId+'"target="blank">'+ticketId+'</a>';
-        
+        console.log(response["conversations"])
         response["conversations"].map(element => {
-          $('#commentsdesc').append("<div class='alert alert-warning' role='alert'"+element["body"]+"</div>");
+          $('#commentsdesc').replaceChildren("<div class='alert alert-warning' role='alert'"+element["body"]+"</div>");
+
         });
-    
+      
       });
     }
+
