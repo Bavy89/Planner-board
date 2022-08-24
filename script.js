@@ -4,9 +4,11 @@ let callCount = 1;
 
 loadBoard();
 
-function loadBoard(){
+
+//Load the KanbanBoard//
+function loadBoard() {
   var settings = {
-    "url": `${baseUrl}api/v2/search/tickets?query="status:2%20OR%20status:9%20OR%20status:11%20OR%20status:10%20OR%20status:8%20OR%20status:7%20OR%20status:3%20OR%20status:4%20OR%20status:12%20AND%20created_at:%272022-01-01%27"&page=${callCount}`,
+    "url": `${baseUrl}api/v2/search/tickets?query="status:2%20OR%20status:9%20OR%20status:11%20OR%20status:10%20OR%20status:8%20OR%20status:7%20OR%20status:3%20OR%20status:4"&page=${callCount}`,
     "method": "GET",
     "timeout": 0,
     "headers": {
@@ -27,6 +29,11 @@ function loadBoard(){
       var ticketStatus = tickets[i]["status"]
       var ticketId = tickets[i]["id"]
       var backlogState = "New"
+      let backlogCount = 0;
+      let readyCount = 0;
+      let inprogressCount = 0;
+      let blockedCount = 0;
+      let doneCount = 0;
 
       if (ticketPriority == "1") {
         var ticketPriority = "<span class='task__tag task__tag--tag1'>Lav</span>"
@@ -51,13 +58,13 @@ function loadBoard(){
         backlogState = '<span class="task__tag5 task__tag5--tag5">Blocked</span>'
       } else if (ticketStatus == "2") {
         backlogState = '<span class="task__tag5 task__tag5--tag5">Ny</span>'
-      } else if (ticketStatus == "12") {
-        backlogState = 'Done'
+      } else if (ticketStatus == "4") {
+        backlogState = '<span class="task__tag5 task__tag5--tag6">Done</span>'
       } else {
-          var backlogState = "";
-        }
-    
-      
+        var backlogState = "";
+      }
+
+
 
       if (ticketStatus == "2" || ticketStatus == "9") {
         var taskType = "#backlog";
@@ -67,7 +74,7 @@ function loadBoard(){
         var taskType = "#inprogressboard";
       } else if (ticketStatus == "8" || ticketStatus == "7" || ticketStatus == "3") {
         var taskType = "#blockedboard";
-      } else if (ticketStatus == "12") {
+      } else if (ticketStatus == "4") {
         var taskType = "#doneboard";
       } else {
         var taskType = "null";
@@ -76,12 +83,12 @@ function loadBoard(){
 
       $(taskType).append(`<div class='task' data-toggle='modal' data-target='#myModal'  onclick='previewTicket("${ticketId}")'><div class='task__tags'>${ticketPriority}<button class='task__options'><i class='fas fa-ellipsis-h'></i></button></div><p>${ticketSubject}</p><div class='task__stats'><span><time datetime='2021-11-24T20:00:00'><i class='fas fa-flag'></i>Opprettet: ${ticketCreated} || id: ${ticketId}</time><small style='position: absolute; bottom: 0; right: 0; width: 100px; text-align:right;'>${backlogState}</small></div>`)
     }
-  checkBoard();
+    checkBoard();
   });
 
 }
 
-
+//Open and view ticket in Modal//
 function previewTicket(ticketId) {
   var settings = {
     "url": `${baseUrl}api/v2/tickets/${ticketId}?include=conversations`,
@@ -105,16 +112,17 @@ function previewTicket(ticketId) {
   });
 }
 
-
+//Add a note to freshdesk//
 function addNote(ticketId) {
   document.getElementById("notefield").innerHTML = `<div class='alert alert-warning' role='alert'><div class="form-group"> <label for="exampleFormControlTextarea1">Skriv en melding..</label> <textarea style="resize: none;" class="form-control" id="commentField" rows="6"></textarea> </div> <div class="btn-group"> <button type="button" class="btn btn-warning" onclick="sendNote(${ticketId})">Add note</button> <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="sr-only">Toggle Dropdown</span> </button> <div class="dropdown-menu"> <a class="dropdown-item" href="#">Add note and set as Done</a> <a class="dropdown-item" href="#">Add note and set as Ready</a> <a class="dropdown-item" href="#">Add note and set as In progress</a><a class="dropdown-item" href="#">Add note and set as Blocked</a><a class="dropdown-item" href="#">Add note and set as Backlog</a></div> </div> <button type="button" class="btn btn-dark" onclick="removeNote()">Avbryt</button><div>`;
 }
 
+//remove notes from modal//
 function removeNote() {
   $("#notefield").empty();
 }
 
-
+//send note to freshdesk//
 function sendNote(ticketId) {
   var commentNote = document.getElementById("commentField").value;
   if (commentNote == "") {
@@ -143,16 +151,15 @@ function sendNote(ticketId) {
 
 }
 
-
-    
-
-
-
+//Checking if the array is empty or not//
 function checkBoard() {
   if (mainResponse["results"].length == 0) {
-} else {
-  callCount += 1;
-  console.log(callCount)
-  loadBoard();
+  } else {
+    callCount += 1;
+    console.log(callCount)
+    loadBoard();
+  }
 }
-}
+
+
+
