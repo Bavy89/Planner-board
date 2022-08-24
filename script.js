@@ -8,7 +8,7 @@ loadBoard();
 //Load the KanbanBoard//
 function loadBoard() {
   var settings = {
-    "url": `${baseUrl}api/v2/search/tickets?query="status:2%20OR%20status:9%20OR%20status:11%20OR%20status:10%20OR%20status:8%20OR%20status:7%20OR%20status:3%20OR%20status:4"&page=${callCount}`,
+    "url": `${baseUrl}api/v2/search/tickets?query="group_id:101000337122"&page=${callCount}`,
     "method": "GET",
     "timeout": 0,
     "headers": {
@@ -16,7 +16,7 @@ function loadBoard() {
       "Authorization": authKey,
     },
   };
-
+// old query: status:2%20OR%20status:9%20OR%20status:11%20OR%20status:10%20OR%20status:8%20OR%20status:7%20OR%20status:3%20OR%20status:4"&page=${callCount}//
   $.ajax(settings).done(function (response) {
     console.log(response)
     tickets = response["results"]
@@ -81,7 +81,7 @@ function loadBoard() {
       }
 
 
-      $(taskType).append(`<div class='task' data-toggle='modal' data-target='#myModal'  onclick='previewTicket("${ticketId}")'><div class='task__tags'>${ticketPriority}<button class='task__options'><i class='fas fa-ellipsis-h'></i></button></div><p>${ticketSubject}</p><div class='task__stats'><hr><span><time datetime='2021-11-24T20:00:00'><i class='fas fa-flag'></i>Opprettet: ${ticketCreated} || id: ${ticketId}</time><small style='position: absolute; bottom: 0; right: 0; width: 100px; text-align:right;'>${backlogState}</small></div>`)
+      $(taskType).append(`<div class='task' data-toggle='modal' data-target='#myModal'  onclick='previewTicket("${ticketId}")'><div class='task__tags'>${ticketPriority}<button class='task__options'><i class='fas fa-ellipsis-h'></i></button></div><p>${ticketSubject}</p><div class='task__stats'><span><time datetime='2021-11-24T20:00:00'><i class='fas fa-flag'></i>Opprettet: ${ticketCreated} || id: ${ticketId}</time><small style='position: absolute; bottom: 0; right: 0; width: 100px; text-align:right;'>${backlogState}</small></div>`)
     }
     checkBoard();
   });
