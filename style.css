@@ -283,24 +283,30 @@ h1 {
 
 .modal {
     color: #000;
+
+    text-align:center;
 }
 
 .modal-content {
-    position: relative;
-    width: auto;
-    min-width: 80rem;
-    display: table; /* This is important */
-    background-color: #666 !important;
-    }
+    display: inline-block;
+    width: 80rem;
+    background-color: #666 !important;    
+    max-height: 95%;
+    overflow-y: auto;
+}
 
- img {
-    max-width: 50rem;
-    object-fit:cover;
-}   
+img {
 
-.modal-dialog {
-    transform: translate(-50, -50%);
-    margin: 0 auto;
+    max-width: 70rem;
+}
+
+img:hover {
+    transform: scale(1.1);
+
+}
+.modal-body {
+
+    background-color: #666 !important;   
 }
 
 .modal-header {
