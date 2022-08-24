@@ -289,13 +289,14 @@ h1 {
     position: relative;
     width: auto;
     min-width: 80rem;
-    max-width: 50rem;
-    display: table; /* This is important */ 
-    overflow-y: auto;    
-    overflow-x: auto;
+    display: table; /* This is important */
     background-color: #666 !important;
-}
+    }
 
+ img {
+    max-width: 50rem;
+    object-fit:cover;
+}   
 
 .modal-dialog {
     transform: translate(-50, -50%);
@@ -308,4 +309,22 @@ h1 {
 
 .modal-footer {
     border-top: 0 !important;
+}
+
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+::-webkit-scrollbar
+{
+    width: 12px;
+    background-color: #F5F5F5;
+}
+::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
 }
