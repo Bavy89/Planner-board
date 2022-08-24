@@ -125,7 +125,7 @@ h1 {
 
 .task__tag--tag1 {
     color: #fff;
-    background-color: #483D8B
+    background-color: #538b3d
 }
 
 .task__tag--tag2 {
@@ -301,6 +301,7 @@ img {
 
 .modal-header {
     background-color: #424242 !important;
+    text-align: center;
 }
 
 .modal-footer {
