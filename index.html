@@ -31,13 +31,14 @@
 
         <!-- Modal body -->
         <div class="modal-body">
+          <div id="notefield"></div>
           <div id="commentsdesc"></div>
           <div style="color:white;" id="modaldesc">ticket details with options</div>
         </div>
 
         <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-warning" disabled="true">Kommenter</button>
+        <div class="modal-footer">  <div class="form-group">
+          <button type="button" class="btn btn-warning" onclick="addNote()" >Kommenter</button>
           <button type="button" class="btn btn-dark" data-dismiss="modal" onclick="deleteData()">Lukk</button>
         </div>
 
