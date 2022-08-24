@@ -283,8 +283,6 @@ h1 {
 
 .modal {
     color: #000;
-
-    text-align:center;
 }
 
 .modal-content {
@@ -296,16 +294,9 @@ h1 {
 }
 
 img {
-
     max-width: 70rem;
 }
-
-img:hover {
-    transform: scale(1.1);
-
-}
 .modal-body {
-
     background-color: #666 !important;   
 }
 
