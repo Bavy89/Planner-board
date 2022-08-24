@@ -292,7 +292,7 @@ h1 {
 }
 
 img {
-    max-width: 70rem;
+    max-width: 70rem !important;
 }
 .modal-body {
     background-color: #666 !important;   
