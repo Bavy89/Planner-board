@@ -287,7 +287,6 @@ h1 {
 
 .modal-content {
     display: inline-block;
-    width: 80rem;
     background-color: #666 !important;    
 }
 
@@ -297,7 +296,7 @@ img {
 .modal-body {
     background-color: #666 !important;   
     overflow-y: auto;
-    max-height: 80%;
+    max-height: 90%;
 }
 
 .modal-header {

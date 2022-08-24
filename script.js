@@ -70,13 +70,13 @@ function previewTicket(ticketId) {
           $('#commentsdesc').append(`<div class='alert alert-warning' role='alert'><h4>Kommentar</h4><small>${element["created_at"]}</small> <hr>${   element["body"]}</div>`);
           
         });
-        document.getElementById("footerBtns").innerHTML = `<button type="button" class="btn btn-warning" onclick="addNote(${ticketId})">Rediger</button><button type="button" class="btn btn-dark" data-dismiss="modal">Lukk</button>`
+        document.getElementById("footerBtns").innerHTML = `<button type="button" class="btn btn-warning" onclick="addNote(${ticketId})">Rediger</button> <button type="button" class="btn btn-dark" data-dismiss="modal">Lukk</button>`
       });
     }
 
 
     function addNote(ticketId) {
-      document.getElementById("notefield").innerHTML = `<div class='alert alert-warning' role='alert'><div class="form-group"> <label for="exampleFormControlTextarea1">Skriv en melding..</label> <textarea style="resize: none;" class="form-control" id="commentField" rows="6"></textarea> </div> <button type="button" class="btn btn-warning" onclick="sendNote(${ticketId})">Kommenter</button><button type="button" class="btn btn-dark" onclick="removeNote()">Avbryt</button><div class="btn-group"> <button type="button" class="btn btn-danger">Action</button> <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="sr-only">Toggle Dropdown</span> </button> <div class="dropdown-menu"> <a class="dropdown-item" href="#">Action</a> <a class="dropdown-item" href="#">Another action</a> <a class="dropdown-item" href="#">Something else here</a> <div class="dropdown-divider"></div> <a class="dropdown-item" href="#">Separated link</a> </div> </div><div>`;
+      document.getElementById("notefield").innerHTML = `<div class='alert alert-warning' role='alert'><div class="form-group"> <label for="exampleFormControlTextarea1">Skriv en melding..</label> <textarea style="resize: none;" class="form-control" id="commentField" rows="6"></textarea> </div> <div class="btn-group"> <button type="button" class="btn btn-warning" onclick="sendNote(${ticketId})">Kommenter</button> <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="sr-only">Toggle Dropdown</span> </button> <div class="dropdown-menu"> <a class="dropdown-item" href="#">Action</a> <a class="dropdown-item" href="#">Another action</a> <a class="dropdown-item" href="#">Something else here</a> <div class="dropdown-divider"></div> <a class="dropdown-item" href="#">Separated link</a> </div> </div> <button type="button" class="btn btn-dark" onclick="removeNote()">Avbryt</button><div>`;
     }
 
     function removeNote(){
@@ -108,3 +108,5 @@ function previewTicket(ticketId) {
         previewTicket(ticketId);
     }, 1000);
       }
+
+      
