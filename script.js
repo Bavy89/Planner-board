@@ -1,77 +1,83 @@
 var baseUrl = "https://specialist-cc.freshdesk.com/"
+var authKey = "Basic aElLdE5uRnJyWk1TTUZKRjI1TzpY"
+let callCount = 1;
 
-var settings = {
-  "url": `${baseUrl}api/v2/tickets?per_page=100&page=1`,
-  "method": "GET",
-  "timeout": 0,
-  "headers": {
-    "Content-Type": "application/json",
-    "Authorization": "Basic aElLdE5uRnJyWk1TTUZKRjI1TzpY",
-    "Cookie": "_x_m=x_c; _x_w=6_1"
-  },
-};
+loadBoard();
 
-$.ajax(settings).done(function (response) {
-  tickets = response
-  console.log(response)
-  for (var i = 0; i < tickets.length; i++) {
-    var ticketPriority = tickets[i]["priority"]
-    var ticketSubject = tickets[i]["subject"]
-    var ticketCreated = tickets[i]["created_at"].slice(0, -10)
-    var ticketStatus = tickets[i]["status"]
-    var ticketId = tickets[i]["id"]
-    var backlogState = "New"
+function loadBoard(){
+  var settings = {
+    "url": `${baseUrl}api/v2/search/tickets?query="status:2%20OR%20status:9%20OR%20status:11%20OR%20status:10%20OR%20status:8%20OR%20status:7%20OR%20status:3%20OR%20status:4%20AND%20created_at:%272022-01-01%27"&page=${callCount}`,
+    "method": "GET",
+    "timeout": 0,
+    "headers": {
+      "Content-Type": "application/json",
+      "Authorization": authKey,
+    },
+  };
 
-    if (ticketPriority == "1") {
-      var ticketPriority = "<span class='task__tag task__tag--tag1'>Lav</span>"
-    } else if (ticketPriority == "2") {
-      var ticketPriority = "<span class='task__tag task__tag--tag2'>Medium</span>"
-    } else if (ticketPriority == "3") {
-      var ticketPriority = "<span class='task__tag task__tag--tag3'>Høy</span>"
-    } else if (ticketPriority == "4") {
-      var ticketPriority = "<span class='task__tag task__tag--tag4'>Haster</span>"
-    } else {
-      var ticketPriority = "null";
-    }
+  $.ajax(settings).done(function (response) {
+    tickets = response["results"]
+    mainResponse = response
+    for (var i = 0; i < tickets.length; i++) {
 
+      var ticketPriority = tickets[i]["priority"]
+      var ticketSubject = tickets[i]["subject"]
+      var ticketCreated = tickets[i]["created_at"].slice(0, -10)
+      var ticketStatus = tickets[i]["status"]
+      var ticketId = tickets[i]["id"]
+      var backlogState = "New"
 
-    if (ticketStatus == "9") {
-      backlogState = 'Backlog'
-    } else if (ticketStatus == "3") {
-      backlogState = 'Pending'
-    } else if (ticketStatus == "7") {
-      backlogState = 'Thirdparty'
-    } else if (ticketStatus == "8") {
-      backlogState = 'Blocked'
-    } else if (ticketStatus == "2") {
-      backlogState = 'Ny'
-    } else {
-        var backlogState = "";
+      if (ticketPriority == "1") {
+        var ticketPriority = "<span class='task__tag task__tag--tag1'>Lav</span>"
+      } else if (ticketPriority == "2") {
+        var ticketPriority = "<span class='task__tag task__tag--tag2'>Medium</span>"
+      } else if (ticketPriority == "3") {
+        var ticketPriority = "<span class='task__tag task__tag--tag3'>Høy</span>"
+      } else if (ticketPriority == "4") {
+        var ticketPriority = "<span class='task__tag task__tag--tag4'>Haster</span>"
+      } else {
+        var ticketPriority = "null";
       }
-  
-    
 
-    if (ticketStatus == "2" || ticketStatus == "9") {
-      var taskType = "#backlog";
-    } else if (ticketStatus == "11") {
-      var taskType = "#readyboard";
-    } else if (ticketStatus == "10") {
-      var taskType = "#inprogressboard";
-    } else if (ticketStatus == "8" || ticketStatus == "7" || ticketStatus == "3") {
-      var taskType = "#blockedboard";
-    } else if (ticketStatus == "4") {
-      var taskType = "#doneboard";
-    } else {
-      var taskType = "null";
+
+      if (ticketStatus == "9") {
+        backlogState = 'Backlog'
+      } else if (ticketStatus == "3") {
+        backlogState = 'Pending'
+      } else if (ticketStatus == "7") {
+        backlogState = 'Thirdparty'
+      } else if (ticketStatus == "8") {
+        backlogState = 'Blocked'
+      } else if (ticketStatus == "2") {
+        backlogState = 'Ny'
+      } else if (ticketStatus == "4") {
+        backlogState = 'Resolved'
+      } else {
+          var backlogState = "";
+        }
+    
+      
+
+      if (ticketStatus == "2" || ticketStatus == "9") {
+        var taskType = "#backlog";
+      } else if (ticketStatus == "11") {
+        var taskType = "#readyboard";
+      } else if (ticketStatus == "10") {
+        var taskType = "#inprogressboard";
+      } else if (ticketStatus == "8" || ticketStatus == "7" || ticketStatus == "3") {
+        var taskType = "#blockedboard";
+      } else if (ticketStatus == "4") {
+        var taskType = "#doneboard";
+      } else {
+        var taskType = "null";
+      }
+
+
+      $(taskType).append(`<div class='task' data-toggle='modal' data-target='#myModal'  onclick='previewTicket("${ticketId}")'><div class='task__tags'>${ticketPriority}<button class='task__options'><i class='fas fa-ellipsis-h'></i></button></div><p>${ticketSubject}</p><div class='task__stats'><span><time datetime='2021-11-24T20:00:00'><i class='fas fa-flag'></i>Opprettet: ${ticketCreated} || id: ${ticketId}</time><small style='position: absolute; bottom: 0; right: 0; width: 100px; text-align:right;'><b>${backlogState}</b></small></span></div>`)
     }
 
-
-    $(taskType).append(`<div class='task' data-toggle='modal' data-target='#myModal'  onclick='previewTicket("${ticketId}")'><div class='task__tags'>${ticketPriority}<button class='task__options'><i class='fas fa-ellipsis-h'></i></button></div><p>${ticketSubject}</p><div class='task__stats'><span><time datetime='2021-11-24T20:00:00'><i class='fas fa-flag'></i>Opprettet: ${ticketCreated} || id: ${ticketId}</time><small style='position: absolute; bottom: 0; right: 0; width: 100px; text-align:right;'><b>${backlogState}</b></small></span></div>`)
-  }
-
-
-});
-
+  });
+}
 
 
 function previewTicket(ticketId) {
@@ -81,8 +87,7 @@ function previewTicket(ticketId) {
     "timeout": 0,
     "headers": {
       "Content-Type": "application/json",
-      "Authorization": "Basic aElLdE5uRnJyWk1TTUZKRjI1TzpY",
-      "Cookie": "_x_m=x_c; _x_w=6_1"
+      "Authorization": authKey,
     },
   };
   $("#commentsdesc").empty();
@@ -115,8 +120,7 @@ function sendNote(ticketId) {
   } else {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Authorization", "Basic aElLdE5uRnJyWk1TTUZKRjI1TzpY");
-    myHeaders.append("Cookie", "_x_m=x_c; _x_w=6_1");
+    myHeaders.append("Authorization", authKey);
 
     var raw = JSON.stringify({
       "body": `${commentNote}<br><br><sub>Kommentert fra KanbanBoard</sub>`
@@ -138,4 +142,19 @@ function sendNote(ticketId) {
 }
 
 
+    
 
+window.onscroll = function() {
+ if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
+    checkBoard();
+ }
+}
+
+function checkBoard() {
+  if (mainResponse["results"].length == 0) {
+} else {
+  callCount += 1;
+  console.log(callCount)
+  loadBoard();
+}
+}
