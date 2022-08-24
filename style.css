@@ -123,6 +123,12 @@ h1 {
     font-size: 12px
 }
 
+.task__tag5 {
+    border-radius: 100px;
+    padding: 2px 13px;
+    font-size: 12px
+}
+
 .task__tag--tag1 {
     color: #fff;
     background-color: #538b3d
@@ -141,6 +147,11 @@ h1 {
 .task__tag--tag4 {
     color: #fff;
     background-color: rgb(255, 72, 0)
+}
+
+.task__tag5--tag5 {
+    color: #fff;
+    background-color: #202020;
 }
 
 .task__tags {
