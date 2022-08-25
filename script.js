@@ -29,11 +29,11 @@ function loadBoard() {
       var ticketStatus = tickets[i]["status"]
       var ticketId = tickets[i]["id"]
       var backlogState = "New"
-      let backlogCount = 0;
-      let readyCount = 0;
-      let inprogressCount = 0;
-      let blockedCount = 0;
-      let doneCount = 0;
+      let backlogV = "9";
+      let readyV = "11";
+      let inprogressV = "10";
+      let blockedV = "8";
+      let doneV = "4";
 
       if (ticketPriority == "1") {
         var ticketPriority = "<span class='task__tag task__tag--tag1'>Lav</span>"
@@ -81,7 +81,7 @@ function loadBoard() {
       }
 
 
-      $(taskType).append(`<div class='task' data-toggle='modal' data-target='#myModal'  onclick='previewTicket("${ticketId}")'><div class='task__tags'>${ticketPriority}<button class='task__options'><i class='fas fa-ellipsis-h'></i></button></div><p>${ticketSubject}</p><div class='task__stats'><span><time datetime='2021-11-24T20:00:00'><i class='fas fa-flag'></i>Opprettet: ${ticketCreated} || id: ${ticketId}</time><small style='position: absolute; bottom: 0; right: 0; width: 100px; text-align:right;'>${backlogState}</small></div>`)
+      $(taskType).append(`<div class='task' data-toggle='modal' data-target='#myModal'  onclick='previewTicket("${ticketId}")'> <div class="btn-group" style="float:right;"><button type="button" class="btn btn-sm btn-dark dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="sr-only">Toggle Dropdown</span></button><div class="dropdown-menu"><a class="dropdown-item" href="#">Backlog</a><a class="dropdown-item" href="#">Ready</a><a class="dropdown-item" href="#">In progress</a><a class="dropdown-item" href="#">Blocked</a><a class="dropdown-item" href="#">Done</a></div></div><div class='task__tags'>${ticketPriority}<button class='task__options'><i class='fas fa-ellipsis-h'></i></button></div><p>${ticketSubject}</p><div class='task__stats'><span><time datetime='2021-11-24T20:00:00'><i class='fas fa-flag'></i>Opprettet: ${ticketCreated} || id: ${ticketId}</time><small style='position: absolute; bottom: 0; right: 0; width: 100px; text-align:right;'>${backlogState}</small></div>`)
     }
     checkBoard();
   });
@@ -163,3 +163,6 @@ function checkBoard() {
 
 
 
+function moveTicket() {
+  
+}
