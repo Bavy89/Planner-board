@@ -1,6 +1,11 @@
 var baseUrl = "https://specialist-cc.freshdesk.com/"
 var authKey = "Basic aElLdE5uRnJyWk1TTUZKRjI1TzpY"
 let callCount = 1;
+let backlogCount = 0;
+let readyCount = 0;
+let inprogCount = 0;
+let blockedCount = 0;
+let doneCount = 0;
 
 loadBoard();
 
@@ -21,6 +26,7 @@ function loadBoard() {
     console.log(response)
     tickets = response["results"]
     mainResponse = response
+    console.log(response)
     for (var i = 0; i < tickets.length; i++) {
 
       var ticketPriority = tickets[i]["priority"]
@@ -28,12 +34,8 @@ function loadBoard() {
       var ticketCreated = tickets[i]["created_at"].slice(0, -10)
       var ticketStatus = tickets[i]["status"]
       var ticketId = tickets[i]["id"]
+      var responderId = tickets[i]["responder_id"]
       var backlogState = "New"
-      let backlogV = "9";
-      let readyV = "11";
-      let inprogressV = "10";
-      let blockedV = "8";
-      let doneV = "4";
 
       if (ticketPriority == "1") {
         var ticketPriority = "<span class='task__tag task__tag--tag1'>Lav</span>"
@@ -46,6 +48,21 @@ function loadBoard() {
       } else {
         var ticketPriority = "null";
       }
+//Agent id's //
+      if (responderId == "101049970109") {
+        var ticketOwner = "<hr>Saksbehandler: Tommy Bekkevold"
+      }else if (responderId == "101049912250") {
+        var ticketOwner = "<hr>Saksbehandler: Andreas Johnson"
+      }else if (responderId == "101049912351") {
+        var ticketOwner = "<hr>Saksbehandler: Bavy Ado"
+      }else if (responderId == "101049969355") {
+        var ticketOwner = "<hr>Saksbehandler: Gaute Sandkjen"
+      }else if (responderId == "101049970406") {
+        var ticketOwner = "<hr>Saksbehandler: Lena Ludvigsen"
+      }else if (responderId == "101049969754") {
+        var ticketOwner = "<hr>Saksbehandler: Stine Bergersen"
+      } else
+      ticketOwner = "<hr>Saksbehandler: Ingen"
 
 
       if (ticketStatus == "9") {
@@ -68,20 +85,25 @@ function loadBoard() {
 
       if (ticketStatus == "2" || ticketStatus == "9") {
         var taskType = "#backlog";
+        backlogCount += 1;
       } else if (ticketStatus == "11") {
         var taskType = "#readyboard";
+        readyCount += 1;
       } else if (ticketStatus == "10") {
         var taskType = "#inprogressboard";
+        inprogCount += 1;
       } else if (ticketStatus == "8" || ticketStatus == "7" || ticketStatus == "3") {
         var taskType = "#blockedboard";
+        blockedCount += 1;
       } else if (ticketStatus == "4") {
         var taskType = "#doneboard";
+        doneCount += 1;
       } else {
         var taskType = "null";
       }
 
 
-      $(taskType).append(`<div class='task' data-toggle='modal' data-target='#myModal'  onclick='previewTicket("${ticketId}")'><div class='task__tags'>${ticketPriority}<button class='task__options'><i class='fas fa-ellipsis-h'></i></button></div><p>${ticketSubject}</p><div class='task__stats'><span><time datetime='2021-11-24T20:00:00'><i class='fas fa-flag'></i>Opprettet: ${ticketCreated} || id: ${ticketId}</time><small style='position: absolute; bottom: 0; right: 0; width: 100px; text-align:right;'>${backlogState}</small></div>`)
+      $(taskType).append(`<div class='task' data-toggle='modal' data-target='#myModal'  onclick='previewTicket("${ticketId}")'><div class='task__tags'>${ticketPriority}<button class='task__options'><i class='fas fa-ellipsis-h'></i></button></div><p>${ticketSubject}</p><div class='task__stats'><span><time datetime='2021-11-24T20:00:00'><i class='fas fa-flag'></i>Opprettet: ${ticketCreated} || id: ${ticketId}</time><small style='position: absolute; bottom: 0; right: 0; width: 100px; text-align:right;'>${backlogState}</small> ${ticketOwner}</div>`)
     }
     checkBoard();
   });
@@ -151,9 +173,14 @@ function sendNote(ticketId) {
 
 }
 
-//Checking if the array is empty or not//
+//Checking if the array is empty or not also adding a total value of tasks each column//
 function checkBoard() {
   if (mainResponse["results"].length == 0) {
+  document.getElementById("backlogCount").innerHTML = `Backlog (${backlogCount.toString()})`;
+  document.getElementById("readyCount").innerHTML = `Ready (${readyCount.toString()})`;
+  document.getElementById("inprogCount").innerHTML = `In progress (${inprogCount.toString()})`;
+  document.getElementById("blockedCount").innerHTML = `Blocked (${blockedCount.toString()})`;
+  document.getElementById("doneCount").innerHTML = `Done (${doneCount.toString()})`;
   } else {
     callCount += 1;
     console.log(callCount)
