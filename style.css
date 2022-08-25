@@ -312,6 +312,7 @@ img {
 .modal-body {
     background-color: #666 !important;   
     overflow-y: auto;
+    overflow-x: hidden;
     max-height: 90%;
 }
 

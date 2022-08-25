@@ -26,7 +26,6 @@ function loadBoard() {
     console.log(response)
     tickets = response["results"]
     mainResponse = response
-    console.log(response)
     for (var i = 0; i < tickets.length; i++) {
 
       var ticketPriority = tickets[i]["priority"]
@@ -39,44 +38,72 @@ function loadBoard() {
 
       if (ticketPriority == "1") {
         var ticketPriority = "<span class='task__tag task__tag--tag1'>Lav</span>"
+
       } else if (ticketPriority == "2") {
         var ticketPriority = "<span class='task__tag task__tag--tag2'>Medium</span>"
+
       } else if (ticketPriority == "3") {
         var ticketPriority = "<span class='task__tag task__tag--tag3'>Høy</span>"
+
       } else if (ticketPriority == "4") {
         var ticketPriority = "<span class='task__tag task__tag--tag4'>Haster</span>"
+
       } else {
         var ticketPriority = "null";
       }
+
 //Agent id's //
       if (responderId == "101049970109") {
-        var ticketOwner = "<hr>Saksbehandler: Tommy Bekkevold"
+        var ticketOwner = "<hr>Saksbehandler: Tommy B."
+
       }else if (responderId == "101049912250") {
-        var ticketOwner = "<hr>Saksbehandler: Andreas Johnson"
+        var ticketOwner = "<hr>Saksbehandler: Andreas J."
+
       }else if (responderId == "101049912351") {
-        var ticketOwner = "<hr>Saksbehandler: Bavy Ado"
+        var ticketOwner = "<hr>Saksbehandler: Bavy A."
+
       }else if (responderId == "101049969355") {
-        var ticketOwner = "<hr>Saksbehandler: Gaute Sandkjen"
+        var ticketOwner = "<hr>Saksbehandler: Gaute S."
+
       }else if (responderId == "101049970406") {
-        var ticketOwner = "<hr>Saksbehandler: Lena Ludvigsen"
+        var ticketOwner = "<hr>Saksbehandler: Lena L."
+
       }else if (responderId == "101049969754") {
-        var ticketOwner = "<hr>Saksbehandler: Stine Bergersen"
+        var ticketOwner = "<hr>Saksbehandler: Stine B."
+
+      }else if (responderId == "101049968803") {
+        var ticketOwner = "<hr>Saksbehandler: Remi I."
+
+      }else if (responderId == "101049796954") {
+        var ticketOwner = "<hr>Saksbehandler: Kristoffer S."
+
+      }else if (responderId == "101049961666") {
+        var ticketOwner = "<hr>Saksbehandler: Susanne J."
+        
+      }else if (responderId == "101049968591") {
+        var ticketOwner = "<hr>Saksbehandler: Edon B."
       } else
       ticketOwner = "<hr>Saksbehandler: Ingen"
 
 
       if (ticketStatus == "9") {
         backlogState = '<span class="task__tag5 task__tag5--tag5">Backlog</span>'
+
       } else if (ticketStatus == "3") {
         backlogState = '<span class="task__tag5 task__tag5--tag5">Pending</span>'
+
       } else if (ticketStatus == "7") {
         backlogState = '<span class="task__tag5 task__tag5--tag5">Thirdparty</span>'
+
       } else if (ticketStatus == "8") {
         backlogState = '<span class="task__tag5 task__tag5--tag5">Blocked</span>'
+
       } else if (ticketStatus == "2") {
         backlogState = '<span class="task__tag5 task__tag5--tag5">Ny</span>'
+
       } else if (ticketStatus == "4") {
         backlogState = '<span class="task__tag5 task__tag5--tag6">Done</span>'
+
       } else {
         var backlogState = "";
       }
@@ -86,18 +113,23 @@ function loadBoard() {
       if (ticketStatus == "2" || ticketStatus == "9") {
         var taskType = "#backlog";
         backlogCount += 1;
+
       } else if (ticketStatus == "11") {
         var taskType = "#readyboard";
         readyCount += 1;
+
       } else if (ticketStatus == "10") {
         var taskType = "#inprogressboard";
         inprogCount += 1;
+
       } else if (ticketStatus == "8" || ticketStatus == "7" || ticketStatus == "3") {
         var taskType = "#blockedboard";
         blockedCount += 1;
+
       } else if (ticketStatus == "4") {
         var taskType = "#doneboard";
         doneCount += 1;
+
       } else {
         var taskType = "null";
       }
@@ -124,14 +156,57 @@ function previewTicket(ticketId) {
   $("#commentsdesc").empty();
   $("#notefield").empty();
   $.ajax(settings).done(function (response) {
-    document.getElementById("modaldesc").innerHTML = `<div class='alert alert-info' role='alert'><h4>${response["subject"]}</h4><small>${response["created_at"]}</small><hr> <p>${response["description"]}</p></div>`;
+    console.log(response)
+
+
+    document.getElementById("modaldesc").innerHTML = `<div class='alert alert-info' role='alert'><h4>${response["subject"]}</h4><small>${response["created_at"].slice(0, -10)}</small><hr> <p>${response["description"]}</p></div>`;
     document.getElementById("taskId").innerHTML = `${response["subject"]} ~ <a href="https://specialist-cc.freshdesk.com/a/tickets/${ticketId}" target="blank">${ticketId}</a>`;
     response["conversations"].map(element => {
-      $('#commentsdesc').append(`<div class='alert alert-warning' role='alert'><h4>Kommentar</h4><small>${element["created_at"]}</small> <hr>${element["body"]}</div>`);
+
+    var responderName = element["user_id"]
+
+      if (responderName == "101049970109") {
+        var commentOwner = "Av: Tommy B."
+  
+      }else if (responderName == "101049912250") {
+        var commentOwner = "Av: Andreas J."
+  
+      }else if (responderName == "101049912351") {
+        var commentOwner = "Av: Bavy A."
+  
+      }else if (responderName == "101049969355") {
+        var commentOwner = "Av: Gaute S."
+  
+      }else if (responderName == "101049970406") {
+        var commentOwner = "Av: Lena L."
+  
+      }else if (responderName == "101049969754") {
+        var commentOwner = "Av: Stine B."
+  
+      }else if (responderName == "101049968803") {
+        var commentOwner = "Av: Remi I."
+  
+      }else if (responderName == "101049796954") {
+        var commentOwner = "Av: Kristoffer S."
+  
+      }else if (responderName == "101049961666") {
+        var commentOwner = "Av: Susanne J."
+        
+      }else if (responderName == "101049968591") {
+        var commentOwner = "Av: Edon B."
+      } else {
+        var commentOwner = "Av: "+element["from_email"]
+      }
+      $('#commentsdesc').prepend(`<div class='alert alert-warning' role='alert'><h4>Kommentar</h4><small>${element["created_at"].slice(0, -10)} || ${commentOwner}</small> <hr>${element["body"]}</div>`);
 
     });
-    document.getElementById("footerBtns").innerHTML = `<button type="button" class="btn btn-warning" onclick="addNote(${ticketId})">Rediger</button> <button type="button" class="btn btn-dark" data-dismiss="modal">Lukk</button>`
+    document.getElementById("footerBtns").innerHTML = `<button type="button" class="btn btn-warning" onclick="addNote(${ticketId}), goToTop()">Rediger</button> <button type="button" class="btn btn-dark" data-dismiss="modal">Lukk</button>`
   });
+}
+
+//scrolls to top if button is clicked//
+function goToTop() {
+  $(".modal-body").animate({ scrollTop: 0 }, "medium");
 }
 
 //Add a note to freshdesk//
