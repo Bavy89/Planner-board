@@ -327,15 +327,18 @@ function moveTicket(statusId, ticketId) {
     "data": JSON.stringify({
       "status": statusId
     }),
+    
   };
   
   $.ajax(settings).done(function (response) {
-    $("#backlog, #readyboard, #inprogressboard, #blockedboard, #doneboard").empty();
-    $("#backlogCount, #readyCount, #inprogCount, #blockedCount, #doneCount").empty();
-
+    $("#backlog, #readyboard, #inprogressboard, #blockedboard, #doneboard, #backlogCount, #readyCount, #inprogCount, #blockedCount, #doneCount").empty();
+    backlogCount = 0;
+    readyCount = 0;
+    inprogCount = 0;
+    blockedCount = 0;
+    doneCount = 0;
     callCount = 1;
     loadBoard();
-    
   });
 }
 
